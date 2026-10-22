@@ -7,6 +7,14 @@ import { api } from '@/lib/api';
 import { Logo } from '../Shell';
 import { useAuth } from '../Providers';
 
+type FieldProps = React.InputHTMLAttributes<HTMLInputElement> & { icon: React.ReactNode };
+// Defined at module level so it keeps the same identity between renders (otherwise the input remounts and loses focus after each keystroke)
+function Field({ icon, ...p }: FieldProps) {
+  return (
+    <label className="relative block"><span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-faint">{icon}</span><input {...p} className="input !pl-10" /></label>
+  );
+}
+
 export function AuthPage({ mode }: { mode: 'login' | 'register' }) {
   const { login, register } = useAuth();
   const router = useRouter();
@@ -25,9 +33,6 @@ export function AuthPage({ mode }: { mode: 'login' | 'register' }) {
   };
   const submit = (e: React.FormEvent) => { e.preventDefault(); void go(() => (isLogin ? login(email, password) : register(name, email, password))); };
 
-  const Field = ({ icon, ...p }: React.InputHTMLAttributes<HTMLInputElement> & { icon: React.ReactNode }) => (
-    <label className="relative block"><span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-faint">{icon}</span><input {...p} className="input !pl-10" /></label>
-  );
   return (
     <div className="relative grid min-h-[calc(100vh-4rem)] place-items-center overflow-hidden px-4 py-10">
       <div className="pointer-events-none absolute inset-0 -z-10 opacity-70" style={{ background: 'radial-gradient(50% 60% at 15% 10%, rgb(var(--primary)/.18), transparent 70%), radial-gradient(45% 55% at 90% 90%, rgb(var(--accent)/.16), transparent 70%)' }} />
@@ -37,9 +42,9 @@ export function AuthPage({ mode }: { mode: 'login' | 'register' }) {
           <p className="text-sm text-muted">{isLogin ? 'Sign in to follow teams and get goal alerts.' : 'Free forever. Follow teams, get alerts, save favourites.'}</p></div>
         <form onSubmit={submit} className="space-y-3" noValidate>
           {!isLogin && <Field icon={<User size={16} />} value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" autoComplete="name" required aria-label="Full name" />}
-          <Field icon={<Mail size={16} />} type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" autoComplete="email" required aria-label="Email" />
-          <div className="relative"><Field icon={<Lock size={16} />} type={show ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} placeholder={isLogin ? 'Password' : 'Password (8+ characters)'} autoComplete={isLogin ? 'current-password' : 'new-password'} required aria-label="Password" />
-            <button type="button" onClick={() => setShow((s) => !s)} aria-label={show ? 'Hide password' : 'Show password'} className="absolute right-3 top-1/2 -translate-y-1/2 text-faint hover:text-ink">{show ? <EyeOff size={16} /> : <Eye size={16} />}</button></div>
+          <Field icon={<Mail size={16} />} type="email" inputMode="email" autoCapitalize="none" spellCheck={false} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" autoComplete="email" required aria-label="Email" />
+          <div className="relative"><Field icon={<Lock size={16} />} type={show ? 'text' : 'password'} spellCheck={false} autoCapitalize="none" value={password} onChange={(e) => setPassword(e.target.value)} placeholder={isLogin ? 'Password' : 'Password (8+ characters)'} autoComplete={isLogin ? 'current-password' : 'new-password'} required aria-label="Password" />
+            <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => setShow((s) => !s)} aria-label={show ? 'Hide password' : 'Show password'} className="absolute right-3 top-1/2 -translate-y-1/2 text-faint hover:text-ink">{show ? <EyeOff size={16} /> : <Eye size={16} />}</button></div>
           {err && <p role="alert" className="rounded-md border border-live/30 bg-live/10 px-3 py-2 text-sm font-medium text-live">{err}</p>}
           <button className="btn-primary w-full" disabled={busy || !email || password.length < (isLogin ? 1 : 8) || (!isLogin && name.trim().length < 2)}>{busy && <Loader2 size={16} className="animate-spin" />}{isLogin ? 'Sign in' : 'Create account'}</button>
         </form>
