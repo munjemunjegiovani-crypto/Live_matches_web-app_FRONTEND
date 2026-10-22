@@ -3,17 +3,27 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { useTheme } from 'next-themes';
-import { Bell, CalendarDays, Heart, LogOut, Moon, Search, Settings, ShieldCheck, Sun, Trophy, Tv, UserRound, Zap, X, Flame } from 'lucide-react';
+import { Bell, CalendarDays, Heart, LogOut, Moon, Search, Settings, ShieldCheck, Sun, Trophy, Tv, UserRound, X, Flame } from 'lucide-react';
 import { api } from '@/lib/api';
 import { cn } from '@/lib/format';
 import { useQuery } from '@/hooks/useQuery';
 import { useAuth } from './Providers';
 import { Crest } from './ui/Crest';
 
-export const Logo = ({ size = 28 }: { size?: number }) => (
+export const LogoMark = ({ size = 32 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 120 120" aria-hidden className="shrink-0">
+    <defs><linearGradient id="lkg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#2563eb" /><stop offset="1" stopColor="#14b8a6" /></linearGradient></defs>
+    <circle cx="60" cy="60" r="54" fill="url(#lkg)" />
+    <circle cx="60" cy="60" r="38" fill="none" stroke="#fff" strokeWidth="7" />
+    <path d="M52 44 80 60 52 76z" fill="#fff" />
+    <circle cx="94" cy="26" r="9" fill="#ff5a5f" stroke="#fff" strokeWidth="4" />
+  </svg>
+);
+
+export const Logo = ({ size = 30 }: { size?: number }) => (
   <span className="inline-flex items-center gap-2 font-display text-[22px] font-extrabold tracking-tight">
-    <span className="grid place-items-center rounded-lg bg-gradient-to-br from-primary to-accent text-on-primary" style={{ width: size, height: size }}><Zap size={size * 0.62} fill="currentColor" strokeWidth={0} /></span>
-    Scorely<span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-accent" aria-hidden />
+    <LogoMark size={size + 4} />
+    <span>Live<span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Kick</span></span>
   </span>
 );
 
@@ -57,7 +67,7 @@ export function Header({ onSearch }: { onSearch: () => void }) {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-bg/85 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 md:px-6">
-        <Link href="/" aria-label="Scorely home"><Logo /></Link>
+        <Link href="/" aria-label="LiveKick home"><Logo /></Link>
         <Link href="/scores" className="ml-1 hidden items-center gap-1.5 rounded-full bg-live/12 px-2.5 py-1 text-[11px] font-extrabold tracking-wide text-live sm:inline-flex">
           <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-live" />LIVE{n > 0 && <span className="num">· {n}</span>}
         </Link>
@@ -146,7 +156,7 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <p className="mx-auto mt-8 max-w-7xl px-4 text-xs text-faint md:px-6">© {new Date().getFullYear()} Scorely. All rights reserved.</p>
+      <p className="mx-auto mt-8 max-w-7xl px-4 text-xs text-faint md:px-6">© {new Date().getFullYear()} LiveKick. All rights reserved.</p>
     </footer>
   );
 }

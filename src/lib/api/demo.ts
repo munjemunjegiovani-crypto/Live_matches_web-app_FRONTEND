@@ -22,8 +22,8 @@ function users(): StoredUser[] {
   let u = read<StoredUser[]>(KEY.users, []);
   if (!u.length) {
     u = [
-      { id: 'u-admin', email: 'admin@scorely.dev', name: 'Scorely Admin', role: 'admin', createdAt: Date.now() - 864e5 * 30, prefs: { ...defaultPrefs }, pass: hash('Admin1234!') },
-      { id: 'u-demo', email: 'demo@scorely.dev', name: 'Demo Fan', role: 'user', createdAt: Date.now() - 864e5 * 12, prefs: { ...defaultPrefs }, pass: hash('Demo1234!') },
+      { id: 'u-admin', email: 'admin@livekick.dev', name: 'LiveKick Admin', role: 'admin', createdAt: Date.now() - 864e5 * 30, prefs: { ...defaultPrefs }, pass: hash('Admin1234!') },
+      { id: 'u-demo', email: 'demo@livekick.dev', name: 'Demo Fan', role: 'user', createdAt: Date.now() - 864e5 * 12, prefs: { ...defaultPrefs }, pass: hash('Demo1234!') },
     ];
     write(KEY.users, u);
   }
@@ -124,7 +124,7 @@ export const demoApi: Api = {
     const u: StoredUser = { id: uid(), email: e, name: name.trim(), role: 'user', createdAt: Date.now(), prefs: { ...defaultPrefs }, pass: hash(password) };
     write(KEY.users, [...list, u]);
     write(KEY.session, u.id);
-    push(u.id, { type: 'SYSTEM', title: 'Welcome to Scorely', body: 'Follow teams and leagues to get goal alerts here.' });
+    push(u.id, { type: 'SYSTEM', title: 'Welcome to LiveKick', body: 'Follow teams and leagues to get goal alerts here.' });
     startWatcher();
     return strip(u);
   },

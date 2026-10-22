@@ -52,10 +52,10 @@ export function AuthPage({ mode }: { mode: 'login' | 'register' }) {
           <div className="mt-5 rounded-lg border border-dashed border-line bg-surface-2 p-3">
             <p className="label-sm mb-2">Try the demo</p>
             <div className="grid grid-cols-2 gap-2">
-              <button disabled={busy} onClick={() => void go(() => login('demo@scorely.dev', 'Demo1234!'))} className="btn-ghost !py-2 text-[13px]">Demo fan</button>
-              <button disabled={busy} onClick={() => void go(() => login('admin@scorely.dev', 'Admin1234!'))} className="btn-ghost !py-2 text-[13px]">Admin</button>
+              <button disabled={busy} onClick={() => void go(() => login('demo@livekick.dev', 'Demo1234!'))} className="btn-ghost !py-2 text-[13px]">Demo fan</button>
+              <button disabled={busy} onClick={() => void go(() => login('admin@livekick.dev', 'Admin1234!'))} className="btn-ghost !py-2 text-[13px]">Admin</button>
             </div>
-            <p className="mt-2 text-[11.5px] text-faint">{api.mode === 'demo' ? 'Accounts are stored in your browser only.' : 'Connected to the Scorely API.'}</p>
+            <p className="mt-2 text-[11.5px] text-faint">{api.mode === 'demo' ? 'Accounts are stored in your browser only.' : 'Connected to the LiveKick API.'}</p>
           </div>
         )}
         <p className="mt-6 text-center text-sm text-muted">{isLogin ? 'New here? ' : 'Already have an account? '}<Link href={isLogin ? '/register' : '/login'} className="font-bold text-primary hover:underline">{isLogin ? 'Create an account' : 'Sign in'}</Link></p>

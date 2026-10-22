@@ -21,8 +21,8 @@ const PLANS = [
 ];
 const FAQ = [
   ['Is the data real?', 'This is a portfolio build, so every match is simulated by a deterministic engine. Teams and players are illustrative and the results are fictional. The architecture is ready to plug in a real sports data provider.'],
-  ['Does it work without a backend?', 'Yes. The web app ships with the same engine as the API and runs fully in your browser. Point it at the Scorely API with a single environment variable to switch to server mode.'],
-  ['Can I watch real match video?', 'Rights holders control broadcasts. Scorely shows where to watch and can embed an official stream URL that an admin provides. The demo player visualises simulated games.'],
+  ['Does it work without a backend?', 'Yes. The web app ships with the same engine as the API and runs fully in your browser. Point it at the LiveKick API with a single environment variable to switch to server mode.'],
+  ['Can I watch real match video?', 'Rights holders control broadcasts. LiveKick shows where to watch and can embed an official stream URL that an admin provides. The demo player visualises simulated games.'],
 ];
 
 export function Landing() {
@@ -40,7 +40,7 @@ export function Landing() {
           <div className="animate-rise">
             <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1.5 text-xs font-bold text-muted"><span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-live" />{live.data ? `${live.data.length} matches live right now` : 'Live now'}</span>
             <h1 className="mt-5 text-[40px] font-extrabold leading-[1.05] tracking-tight sm:text-6xl">Every score.<br /><span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Every second.</span></h1>
-            <p className="mt-5 max-w-xl text-lg text-muted">Scorely brings live scores, match centre, standings and history for football, basketball, tennis, cricket and rugby into one fast, beautiful app.</p>
+            <p className="mt-5 max-w-xl text-lg text-muted">LiveKick brings live scores, match centre, standings and history for football, basketball, tennis, cricket and rugby into one fast, beautiful app.</p>
             <div className="mt-8 flex flex-wrap gap-3"><Link href="/scores" className="btn-primary !px-6 !py-3 text-base">Open live scores<ArrowRight size={18} /></Link><Link href="/watch" className="btn-ghost !px-6 !py-3 text-base"><Tv size={18} />Watch live</Link></div>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted">{['Five sports', 'Dark & light mode', 'No sign-up needed'].map((t) => <span key={t} className="flex items-center gap-1.5"><Check size={15} className="text-accent" />{t}</span>)}</div>
           </div>

@@ -1,4 +1,4 @@
-# Scorely (web app)
+# LiveKick (web app)
 
 Live sports scores platform: live scoreboard, match centre (momentum, pitch tracker, lineups, stats, commentary),
 watch centre, leagues and standings, history search, favourites, alerts, admin console, light and dark mode.

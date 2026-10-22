@@ -70,7 +70,7 @@ export function Admin() {
               return <div key={String(l)} className="card p-4"><I size={18} className="text-primary" /><p className="num mt-3 font-display text-3xl font-extrabold">{v === undefined ? '–' : String(v)}</p><p className="label-sm">{String(l)}</p></div>;
             })}
           </div>
-          <div className="card flex flex-wrap items-center gap-4 p-4"><div className="min-w-0 flex-1"><p className="font-bold">Provider sync</p><p className="text-sm text-muted">{api.mode === 'demo' ? 'Demo mode: matches come from the built-in simulator running in your browser.' : 'Connected to the Scorely API. Trigger an ingestion cycle on the server.'}</p><p className="mt-1 text-xs text-faint">{o?.leagues} leagues · {o?.teams} teams · {api.mode === 'api' ? `${o?.sseClients ?? 0} realtime clients` : 'local data'}</p></div>
+          <div className="card flex flex-wrap items-center gap-4 p-4"><div className="min-w-0 flex-1"><p className="font-bold">Provider sync</p><p className="text-sm text-muted">{api.mode === 'demo' ? 'Demo mode: matches come from the built-in simulator running in your browser.' : 'Connected to the LiveKick API. Trigger an ingestion cycle on the server.'}</p><p className="mt-1 text-xs text-faint">{o?.leagues} leagues · {o?.teams} teams · {api.mode === 'api' ? `${o?.sseClients ?? 0} realtime clients` : 'local data'}</p></div>
             <button className="btn-primary" onClick={async () => { try { const r = await api.admin.sync(); toast({ title: 'Sync complete', body: `${r.live} live, ${r.changes} change(s).`, tone: 'success' }); } catch (e) { toast({ title: 'Sync failed', body: (e as Error).message, tone: 'info' }); } }}><RefreshCw size={16} />Run sync now</button></div>
         </div>
       )}

@@ -82,10 +82,10 @@ export function Favorites() {
       </div>
 
       <section className="relative mt-8 overflow-hidden rounded-xl border border-primary/30 bg-gradient-to-br from-primary/15 via-surface to-accent/10 p-5">
-        <p className="label-sm text-primary">Scorely Pro · coming soon</p>
+        <p className="label-sm text-primary">LiveKick Pro · coming soon</p>
         <h3 className="mt-1 flex items-center gap-2 font-display text-lg font-extrabold"><Crown size={18} className="text-warn" />Unlimited alerts, ad-free, deep stats</h3>
         <p className="mt-1 text-sm text-muted">This is a portfolio demo, so there is no billing. The Pro plan shows how a paid tier would look.</p>
-        <button className="btn-primary mt-4" onClick={() => toast({ title: 'Thanks for your interest', body: 'Scorely Pro is a design preview in this demo.', tone: 'info' })}>Notify me</button>
+        <button className="btn-primary mt-4" onClick={() => toast({ title: 'Thanks for your interest', body: 'LiveKick Pro is a design preview in this demo.', tone: 'info' })}>Notify me</button>
       </section>
     </div>
   );
